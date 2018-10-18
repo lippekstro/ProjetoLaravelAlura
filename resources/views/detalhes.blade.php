@@ -7,6 +7,8 @@
     <p class="card-text">Descrição: {{ $p->descricao }}</p>
     <p class="card-text">Preco: {{ $p->valor }}</p>
     <p class="card-text">Quantidade: {{ $p->quantidade }}</p>
+    <p class="card-text">Tamanho: {{ $p->tamanho }}</p>
+    <p class="card-text">Categoria: {{ $p->categoria->nome }}</p>
   </div>
 </div>
 @stop

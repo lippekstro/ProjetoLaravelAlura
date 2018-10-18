@@ -1,16 +1,22 @@
 <?php
 
 use Illuminate\Database\Seeder;
+use estoque\Categoria;
 
 class DatabaseSeeder extends Seeder
 {
-    /**
-     * Seed the application's database.
-     *
-     * @return void
-     */
     public function run()
     {
-        // $this->call(UsersTableSeeder::class);
+        $this->call('CategoriaTableSeeder');
+    }
+}
+
+class CategoriaTableSeeder extends Seeder{
+    public function run(){
+        Categoria::create(['nome' => 'eletrodomesticos']);
+        Categoria::create(['nome' => 'eletronicos']);
+        Categoria::create(['nome' => 'brinquedos']);
+        Categoria::create(['nome' => 'livros']);
+        Categoria::create(['nome' => 'esportes']);
     }
 }

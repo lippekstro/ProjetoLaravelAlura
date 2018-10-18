@@ -7,11 +7,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" type="text/css" media="screen" href="{{asset('css/bootstrap.css')}}" />
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <script src="js/bootstrap.min.js"></script>
+    <script src="{{asset('js/bootstrap.js')}}"></script>
 </head>
 <body>
 
 <div class="container">
+<ul class="nav navbar-nav navbar-right">
+  
+</ul>
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <a class="navbar-brand" href="/produtos">Estoque</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">

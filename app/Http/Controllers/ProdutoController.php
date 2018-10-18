@@ -2,44 +2,61 @@
 namespace estoque\Http\Controllers;
 use Illuminate\Support\Facades\DB;
 use Request;
+use Validator;
+use estoque\Produto;
+use estoque\Http\Requests\ProdutoRequest;
+use Auth;
+use estoque\Categoria;
 
 class ProdutoController extends Controller{
+
 	public function lista(){
-        
-        $produtos = DB::select('select * from produtos');
+        $produtos = Produto::all();
 
         return view('listagem')->with('produtos', $produtos);
     }
 
     public function mostra(){
-        $id = Request::input('id');
-        $produto = DB::select('select * from produtos where id = ?', [$id]);
+        $params = Request::input('id');
+        $produto = Produto::find($params);
         if(empty($produto)){
             return "<h1>Esse produto não existe</h1>";
         }else{
-            return view('detalhes')->with('p', $produto[0]);
+            return view('detalhes')->with('p', $produto);
         }
     }
 
     public function novo(){
-        return view('formulario');
+        return view('formulario')->with('categorias', Categoria::all());
     }
 
-    public function adiciona(){
-        $nome = Request::input('nome');
-        $quantidade = Request::input('quantidade');
-        $valor = Request::input('valor');
-        $descricao = Request::input('descricao');
-
-        DB::insert('insert into produtos (nome, valor, quantidade, descricao) values (?,?,?,?);', array($nome, $valor, $quantidade, $descricao));
+    public function adiciona(ProdutoRequest $request){
+        $params = $request->all();
+        $produto = new Produto($params);
+        $produto->save();
 
         return redirect('/produtos')->withInput();
     }
 
     public function deleta(){
-        $id = Request::input('id');
+        $params = Request::input('id');
+        $produto = Produto::find($params);
+        $produto->delete();
 
-        DB::delete('delete from produtos where id = ?', [$id]);
+        return redirect('/produtos')->withInput();
+    }
+
+    public function mostraAtualiza(){
+        $id = Request::input('id');
+        $produto = Produto::find($id);
+
+        return view('/formAtualiza')->with('p', $produto)->with('categorias', Categoria::all());
+    }
+
+    public function atualiza(ProdutoRequest $request){
+        $produto = Produto::find($request->id);
+        $produto->fill($request->all());
+        $produto->save();
 
         return redirect('/produtos')->withInput();
     }

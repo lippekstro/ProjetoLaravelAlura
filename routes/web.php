@@ -1,11 +1,14 @@
 <?php
 
 Route::get('/', function () {
-    return "<h1>Primeira Logica</h1>";
+    return redirect('/produtos');
 });
 
 Route::get('/produtos', 'ProdutoController@lista');
-Route::get('/produtos/mostra', 'ProdutoController@mostra');
+Route::post('/produtos/mostra', 'ProdutoController@mostra');
 Route::get('/produtos/novo', 'ProdutoController@novo');
 Route::post('/produtos/adiciona', 'ProdutoController@adiciona');
-Route::get('/produtos/deleta', 'ProdutoController@deleta');
+Route::post('/produtos/deleta', 'ProdutoController@deleta');
+Route::post('/produtos/formAtualiza', 'ProdutoController@mostraAtualiza');
+Route::post('/produtos/atualiza', 'ProdutoController@atualiza');
+
